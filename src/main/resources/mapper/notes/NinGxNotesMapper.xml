@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.sample.notes.dao.NinGxNotesMapper">
+  <resultMap id="BaseResultMap" type="cn.sample.notes.domain.NinGxNotes">
+    <id column="notes_id" jdbcType="BIGINT" property="notesId" />
+    <result column="course_id" jdbcType="BIGINT" property="courseId" />
+    <result column="node_id" jdbcType="BIGINT" property="nodeId" />
+    <result column="user_code" jdbcType="VARCHAR" property="userCode" />
+    <result column="user_name" jdbcType="VARCHAR" property="userName" />
+    <result column="notes_type_name" jdbcType="VARCHAR" property="notesTypeName" />
+    <result column="institution_code" jdbcType="VARCHAR" property="institutionCode" />
+    <result column="create_user_id" jdbcType="BIGINT" property="createUserId" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="modify_user_id" jdbcType="BIGINT" property="modifyUserId" />
+    <result column="modify_time" jdbcType="TIMESTAMP" property="modifyTime" />
+    <result column="del" jdbcType="TINYINT" property="del" />
+    <result column="from_id" jdbcType="BIGINT" property="fromId" />
+    <result column="note_img" jdbcType="VARCHAR" property="noteImg" />
+    <result column="notes_content" jdbcType="LONGVARCHAR" property="notesContent" />
+  </resultMap>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select notes_id, course_id, node_id, user_code, user_name, notes_type_name, institution_code, 
+    create_user_id, create_time, modify_user_id, modify_time, del, from_id, note_img, 
+    notes_content
+    from nin_gx_notes
+    where notes_id = #{notesId,jdbcType=BIGINT}
+  </select>
+  <sql id="sql_where">
+    <where>
+      <if test="notesId != null">
+         and notes_id = #{notesId,jdbcType=BIGINT}
+      </if>
+      <if test="courseId != null">
+         and course_id = #{courseId,jdbcType=BIGINT}
+      </if>
+      <if test="nodeId != null">
+         and node_id = #{nodeId,jdbcType=BIGINT}
+      </if>
+      <if test="userCode != null">
+         and user_code = #{userCode,jdbcType=VARCHAR}
+      </if>
+      <if test="userName != null">
+         and user_name = #{userName,jdbcType=VARCHAR}
+      </if>
+      <if test="notesTypeName != null">
+         and notes_type_name = #{notesTypeName,jdbcType=VARCHAR}
+      </if>
+      <if test="institutionCode != null">
+         and institution_code = #{institutionCode,jdbcType=VARCHAR}
+      </if>
+      <if test="createUserId != null">
+         and create_user_id = #{createUserId,jdbcType=BIGINT}
+      </if>
+      <if test="createTime != null">
+         and create_time = #{createTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="modifyUserId != null">
+         and modify_user_id = #{modifyUserId,jdbcType=BIGINT}
+      </if>
+      <if test="modifyTime != null">
+         and modify_time = #{modifyTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="del != null">
+         and del = #{del,jdbcType=TINYINT}
+      </if>
+      <if test="fromId != null">
+         and from_id = #{fromId,jdbcType=BIGINT}
+      </if>
+      <if test="noteImg != null">
+         and note_img = #{noteImg,jdbcType=VARCHAR}
+      </if>
+      <if test="notesContent != null">
+         and notes_content = #{notesContent,jdbcType=LONGVARCHAR}
+      </if>
+    </where>
+  </sql>
+  <select id="getList" parameterType="cn.sample.notes.domain.NinGxNotes" resultMap="BaseResultMap">
+     select notes_id,course_id, node_id, user_code, user_name, notes_type_name, institution_code, create_user_id, create_time, modify_user_id, modify_time, del, from_id, note_img, notes_content from nin_gx_notes
+    <include refid="sql_where" />
+  </select>
+  <insert id="insertSelective" keyColumn="notes_id" keyProperty="notesId" parameterType="cn.sample.notes.domain.NinGxNotes" useGeneratedKeys="true">
+    insert into nin_gx_notes
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="notesId != null">
+        notes_id,
+      </if>
+      <if test="courseId != null">
+        course_id,
+      </if>
+      <if test="nodeId != null">
+        node_id,
+      </if>
+      <if test="userCode != null">
+        user_code,
+      </if>
+      <if test="userName != null">
+        user_name,
+      </if>
+      <if test="notesTypeName != null">
+        notes_type_name,
+      </if>
+      <if test="institutionCode != null">
+        institution_code,
+      </if>
+      <if test="createUserId != null">
+        create_user_id,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="modifyUserId != null">
+        modify_user_id,
+      </if>
+      <if test="modifyTime != null">
+        modify_time,
+      </if>
+      <if test="del != null">
+        del,
+      </if>
+      <if test="fromId != null">
+        from_id,
+      </if>
+      <if test="noteImg != null">
+        note_img,
+      </if>
+      <if test="notesContent != null">
+        notes_content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="notesId != null">
+        #{notesId,jdbcType=BIGINT},
+      </if>
+      <if test="courseId != null">
+        #{courseId,jdbcType=BIGINT},
+      </if>
+      <if test="nodeId != null">
+        #{nodeId,jdbcType=BIGINT},
+      </if>
+      <if test="userCode != null">
+        #{userCode,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null">
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="notesTypeName != null">
+        #{notesTypeName,jdbcType=VARCHAR},
+      </if>
+      <if test="institutionCode != null">
+        #{institutionCode,jdbcType=VARCHAR},
+      </if>
+      <if test="createUserId != null">
+        #{createUserId,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyUserId != null">
+        #{modifyUserId,jdbcType=BIGINT},
+      </if>
+      <if test="modifyTime != null">
+        #{modifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="del != null">
+        #{del,jdbcType=TINYINT},
+      </if>
+      <if test="fromId != null">
+        #{fromId,jdbcType=BIGINT},
+      </if>
+      <if test="noteImg != null">
+        #{noteImg,jdbcType=VARCHAR},
+      </if>
+      <if test="notesContent != null">
+        #{notesContent,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.sample.notes.domain.NinGxNotes">
+    update nin_gx_notes
+    <set>
+      <if test="courseId != null">
+        course_id = #{courseId,jdbcType=BIGINT},
+      </if>
+      <if test="nodeId != null">
+        node_id = #{nodeId,jdbcType=BIGINT},
+      </if>
+      <if test="userCode != null">
+        user_code = #{userCode,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null">
+        user_name = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="notesTypeName != null">
+        notes_type_name = #{notesTypeName,jdbcType=VARCHAR},
+      </if>
+      <if test="institutionCode != null">
+        institution_code = #{institutionCode,jdbcType=VARCHAR},
+      </if>
+      <if test="createUserId != null">
+        create_user_id = #{createUserId,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyUserId != null">
+        modify_user_id = #{modifyUserId,jdbcType=BIGINT},
+      </if>
+      <if test="modifyTime != null">
+        modify_time = #{modifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="del != null">
+        del = #{del,jdbcType=TINYINT},
+      </if>
+      <if test="fromId != null">
+        from_id = #{fromId,jdbcType=BIGINT},
+      </if>
+      <if test="noteImg != null">
+        note_img = #{noteImg,jdbcType=VARCHAR},
+      </if>
+      <if test="notesContent != null">
+        notes_content = #{notesContent,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where notes_id = #{notesId,jdbcType=BIGINT}
+  </update>
+  <insert id="insertBatch" parameterType="java.util.List">
+    insert into nin_gx_notes (notes_id, course_id, node_id, 
+      user_code, user_name, notes_type_name, 
+      institution_code, create_user_id, 
+      create_time, modify_user_id, modify_time, 
+      del, from_id, note_img, 
+      notes_content)
+    values 
+    <foreach  collection ="list" index ="index" item ="item" separator  =",">
+       (#{item.notesId,jdbcType=BIGINT}, #{item.courseId,jdbcType=BIGINT}, #{item.nodeId,jdbcType=BIGINT}, 
+        #{item.userCode,jdbcType=VARCHAR}, #{item.userName,jdbcType=VARCHAR}, #{item.notesTypeName,jdbcType=VARCHAR}, 
+        #{item.institutionCode,jdbcType=VARCHAR}, #{item.createUserId,jdbcType=BIGINT}, 
+        #{item.createTime,jdbcType=TIMESTAMP}, #{item.modifyUserId,jdbcType=BIGINT}, #{item.modifyTime,jdbcType=TIMESTAMP}, 
+        #{item.del,jdbcType=TINYINT}, #{item.fromId,jdbcType=BIGINT}, #{item.noteImg,jdbcType=VARCHAR}, 
+        #{item.notesContent,jdbcType=LONGVARCHAR})
+    </foreach >
+  </insert>
+  <delete id="deleteByParameter" parameterType="cn.sample.notes.domain.NinGxNotes">
+     delete from nin_gx_notes
+    <include refid="sql_where" />
+  </delete>
+</mapper>

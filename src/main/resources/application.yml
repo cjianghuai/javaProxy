@@ -1,0 +1,27 @@
+server:
+  port: 9999
+app:
+  id: sample
+
+spring:
+    application:
+      name: sample
+    profiles:
+      active: test
+    #prefix静态模板文件路径,suffix静态模板文件后缀名
+    thymeleaf:
+      prefix: classpath:/templates/
+      suffix: .html
+      encoding: UTF-8
+      cache: false
+      mode: LEGACYHTML5
+    datasource:
+        druid:
+          url: jdbc:mysql://127.0.0.1:3306/nin_gx?useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true&serverTimezone=GMT%2B8
+          username: root
+          password: 123456
+          driver-class-name: com.mysql.jdbc.Driver #com.mysql.cj.jdbc.Driver
+mybatis:
+  mapperLocations: classpath:mapper/**/*.xml
+  configLocation: classpath:mybatis-config.xml
+  typeAliasesPackage: cn.sample.domain
